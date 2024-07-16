@@ -1,18 +1,14 @@
 {
   "version": 2,
-  "dgSpecHash": "vqsG4ImgVNE=",
+  "dgSpecHash": "Igbd400ztkA=",
   "success": true,
-  "projectFilePath": "C:\\Users\\Usuario\\Documents\\Repositories\\BitMapRenderer\\BitMapRenderer.csproj",
+  "projectFilePath": "C:\\Users\\fedeg\\Documents\\Repositories\\bitmap-renderer\\BitMapRenderer.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\Usuario\\.nuget\\packages\\microsoft.win32.systemevents\\8.0.0\\microsoft.win32.systemevents.8.0.0.nupkg.sha512",
-    "C:\\Users\\Usuario\\.nuget\\packages\\skiasharp\\2.88.8\\skiasharp.2.88.8.nupkg.sha512",
-    "C:\\Users\\Usuario\\.nuget\\packages\\skiasharp.nativeassets.macos\\2.88.8\\skiasharp.nativeassets.macos.2.88.8.nupkg.sha512",
-    "C:\\Users\\Usuario\\.nuget\\packages\\skiasharp.nativeassets.win32\\2.88.8\\skiasharp.nativeassets.win32.2.88.8.nupkg.sha512",
-    "C:\\Users\\Usuario\\.nuget\\packages\\system.drawing.common\\8.0.7\\system.drawing.common.8.0.7.nupkg.sha512",
-    "C:\\Users\\Usuario\\.nuget\\packages\\microsoft.netcore.app.ref\\6.0.32\\microsoft.netcore.app.ref.6.0.32.nupkg.sha512",
-    "C:\\Users\\Usuario\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\6.0.32\\microsoft.windowsdesktop.app.ref.6.0.32.nupkg.sha512",
-    "C:\\Users\\Usuario\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\6.0.32\\microsoft.aspnetcore.app.ref.6.0.32.nupkg.sha512",
-    "C:\\Users\\Usuario\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\6.0.32\\microsoft.netcore.app.host.win-x64.6.0.32.nupkg.sha512"
+    "C:\\Users\\fedeg\\.nuget\\packages\\microsoft.win32.systemevents\\8.0.0\\microsoft.win32.systemevents.8.0.0.nupkg.sha512",
+    "C:\\Users\\fedeg\\.nuget\\packages\\skiasharp\\2.88.8\\skiasharp.2.88.8.nupkg.sha512",
+    "C:\\Users\\fedeg\\.nuget\\packages\\skiasharp.nativeassets.macos\\2.88.8\\skiasharp.nativeassets.macos.2.88.8.nupkg.sha512",
+    "C:\\Users\\fedeg\\.nuget\\packages\\skiasharp.nativeassets.win32\\2.88.8\\skiasharp.nativeassets.win32.2.88.8.nupkg.sha512",
+    "C:\\Users\\fedeg\\.nuget\\packages\\system.drawing.common\\8.0.7\\system.drawing.common.8.0.7.nupkg.sha512"
   ],
   "logs": []
 }
