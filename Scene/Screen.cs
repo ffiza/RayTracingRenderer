@@ -2,8 +2,8 @@
 {
     public class Screen
     {
-        private float width;
-        private float height;
+        private readonly float width;
+        private readonly float height;
 
         public Screen(float width, float height)
         {

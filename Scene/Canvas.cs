@@ -2,8 +2,8 @@
 {
     public class Canvas
     {
-        private int width;
-        private int height;
+        private readonly int width;
+        private readonly int height;
 
         public Canvas(int width, int height)
         {
