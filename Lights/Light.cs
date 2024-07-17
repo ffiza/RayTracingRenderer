@@ -1,10 +1,10 @@
 ﻿namespace BitMapRenderer.Lights
 {
-    internal class BaseLight
+    internal class Light
     {
         private readonly float intensity;
         
-        public BaseLight(float intensity)
+        public Light(float intensity)
         {
             this.intensity = intensity;
         }

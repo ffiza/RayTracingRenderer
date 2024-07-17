@@ -1,6 +1,19 @@
-﻿namespace BitMapRenderer.Scene
+﻿using System.Numerics;
+
+namespace BitMapRenderer.Scene
 {
-    internal class Camera
+    public class Camera
     {
+        private Vector3 position;
+
+        public Camera(Vector3 position)
+        {
+            this.position = position;
+        }
+
+        public Vector3 GetPosition()
+        {
+            return this.position;
+        }
     }
 }
