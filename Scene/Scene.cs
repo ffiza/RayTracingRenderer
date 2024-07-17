@@ -8,7 +8,7 @@ namespace BitMapRenderer.Scene
 {
     public class Scene
     {
-        private List<Entity> entities = new List<Entity> { };
+        private readonly List<Entity> entities = new() { };
 
         public Scene() { }
 

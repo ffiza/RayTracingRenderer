@@ -2,9 +2,9 @@
 {
     public class Viewport
     {
-        private float cameraDistance;
-        private float width;
-        private float height;
+        private readonly float cameraDistance;
+        private readonly float width;
+        private readonly float height;
 
         public Viewport(float cameraDistance, float width, float height)
         {

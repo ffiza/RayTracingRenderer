@@ -11,7 +11,7 @@ namespace BitMapRenderer.Entities
     public class Entity
     {
         private Vector3 position;
-        private SKColor color;
+        private readonly SKColor color;
 
         public Entity(Vector3 position, SKColor color)
         {
