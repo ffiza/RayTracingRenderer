@@ -2,7 +2,7 @@
 
 namespace BitMapRenderer.Lights
 {
-    internal class PointLight : Light
+    public class PointLight : Light
     {
         private Vector3 position;
 

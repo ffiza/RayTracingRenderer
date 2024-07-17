@@ -1,6 +1,7 @@
 ﻿using System.Numerics;
 using BitMapRenderer.Common;
 using BitMapRenderer.Entities;
+using BitMapRenderer.Lights;
 using BitMapRenderer.Rays;
 using BitMapRenderer.Scene;
 using SkiaSharp;
@@ -18,12 +19,13 @@ class Program
         Camera camera = new(Vector3.Zero);
         Viewport viewport = new(1f, 1f, 1f);
         Canvas sceneCanvas = new(width, height);
-        Sphere sphere = new(new Vector3(0f, -1f, 3f), 1f, new SKColor(255, 0, 0));
-        scene.AddEntity(sphere);
-        sphere = new Sphere(new Vector3(2f, 0f, 10f), 1f, new SKColor(0, 0, 255));
-        scene.AddEntity(sphere);
-        sphere = new Sphere(new Vector3(-2f, 0f, 4f), 1f, new SKColor(0, 255, 0));
-        scene.AddEntity(sphere);
+        scene.AddEntity(new Sphere(new Vector3(0f, -1f, 3f), 1f, new SKColor(255, 0, 0)));
+        scene.AddEntity(new Sphere(new Vector3(2f, 0f, 4f), 1f, new SKColor(0, 0, 255)));
+        scene.AddEntity(new Sphere(new Vector3(-2f, 0f, 4f), 1f, new SKColor(0, 255, 0)));
+        scene.AddEntity(new Sphere(new Vector3(0f, -5001f, 0f), 5000f, new SKColor(255, 255, 0)));
+        scene.AddLight(new AmbientLight(0.2f));
+        scene.AddLight(new PointLight(0.6f, new Vector3(2f, 1f, 0f)));
+        scene.AddLight(new DirectionalLight(0.2f, new Vector3(1f, 4f, 4f)));
 
         // Create a new SKBitmap object
         using var bmp = new SKBitmap(width, height);

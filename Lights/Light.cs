@@ -1,6 +1,6 @@
 ﻿namespace BitMapRenderer.Lights
 {
-    internal class Light
+    public class Light
     {
         private readonly float intensity;
         

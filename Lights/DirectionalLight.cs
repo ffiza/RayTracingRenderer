@@ -2,7 +2,7 @@
 
 namespace BitMapRenderer.Lights
 {
-    internal class DirectionalLight : Light
+    public class DirectionalLight : Light
     {
         private Vector3 direction;
 
