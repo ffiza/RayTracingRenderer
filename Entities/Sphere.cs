@@ -1,7 +1,7 @@
 ﻿using System.Numerics;
 using SkiaSharp;
 
-namespace BitMapRenderer.Entities
+namespace RayTracingRenderer.Entities
 {
     public class Sphere : Entity
     {

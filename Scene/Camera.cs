@@ -1,6 +1,6 @@
 ﻿using System.Numerics;
 
-namespace BitMapRenderer.Scene
+namespace RayTracingRenderer.Scene
 {
     public class Camera
     {

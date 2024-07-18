@@ -1,6 +1,6 @@
 ﻿using System.Numerics;
 
-namespace BitMapRenderer.Lights
+namespace RayTracingRenderer.Lights
 {
     public class DirectionalLight : Light
     {

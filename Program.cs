@@ -1,9 +1,9 @@
 ﻿using System.Numerics;
-using BitMapRenderer.Common;
-using BitMapRenderer.Entities;
-using BitMapRenderer.Lights;
-using BitMapRenderer.Rays;
-using BitMapRenderer.Scene;
+using RayTracingRenderer.Common;
+using RayTracingRenderer.Entities;
+using RayTracingRenderer.Lights;
+using RayTracingRenderer.Rays;
+using RayTracingRenderer.Scene;
 using SkiaSharp;
 
 class Program

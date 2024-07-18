@@ -1,4 +1,4 @@
-﻿namespace BitMapRenderer.Lights
+﻿namespace RayTracingRenderer.Lights
 {
     public class AmbientLight : Light
     {

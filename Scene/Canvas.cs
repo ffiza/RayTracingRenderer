@@ -1,4 +1,4 @@
-﻿namespace BitMapRenderer.Scene
+﻿namespace RayTracingRenderer.Scene
 {
     public class Canvas
     {

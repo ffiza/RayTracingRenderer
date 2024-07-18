@@ -1,11 +1,11 @@
-﻿using BitMapRenderer.Entities;
-using BitMapRenderer.Rays;
-using BitMapRenderer.Lights;
+﻿using RayTracingRenderer.Entities;
+using RayTracingRenderer.Rays;
+using RayTracingRenderer.Lights;
 using SkiaSharp;
 using System;
 using System.Numerics;
 
-namespace BitMapRenderer.Scene
+namespace RayTracingRenderer.Scene
 {
     public class Scene
     {

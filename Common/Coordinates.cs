@@ -1,7 +1,7 @@
-﻿using BitMapRenderer.Scene;
+﻿using RayTracingRenderer.Scene;
 using System.Numerics;
 
-namespace BitMapRenderer.Common
+namespace RayTracingRenderer.Common
 {
     public class Coordinates
     {

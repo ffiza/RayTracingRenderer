@@ -1,7 +1,7 @@
-﻿using BitMapRenderer.Entities;
+﻿using RayTracingRenderer.Entities;
 using System.Numerics;
 
-namespace BitMapRenderer.Rays
+namespace RayTracingRenderer.Rays
 {
     public class Ray
     {
