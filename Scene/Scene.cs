@@ -67,7 +67,7 @@ namespace RayTracingRenderer.Scene
             surfaceNormal /= surfaceNormal.Length();
 
             SKColor entityColor = closestEntity.GetColor();
-            float intensity = ComputeLightning(pointCoords, surfaceNormal, -ray.GetDirection(), closestEntity.GetSpecularExponent());
+            float intensity = ComputeLightning(pointCoords, surfaceNormal, - ray.GetDirection(), closestEntity.GetSpecularExponent());
             SKColor color = new((byte)(entityColor.Red * intensity), (byte)(entityColor.Green * intensity), (byte)(entityColor.Blue * intensity));
 
             return color;
@@ -104,12 +104,11 @@ namespace RayTracingRenderer.Scene
                     // Compute specular reflection
                     if (specularExponent != -1)
                     {
-                        Vector3 reflectedDir = 2 * surfaceNormal * Vector3.Dot(surfaceNormal, lightDirection) - lightDirection;
+                        Vector3 reflectedDir = - Vector3.Reflect(lightDirection, surfaceNormal);
                         float reflectedDotView = Vector3.Dot(reflectedDir, viewDirection);
                         if (reflectedDotView > 0)
                         {
                             i += light.GetIntensity() * MathF.Pow(reflectedDotView / reflectedDir.Length() / viewDirection.Length(), specularExponent);
-                            //i += 0.05f;
                         }
                     }
                 }
