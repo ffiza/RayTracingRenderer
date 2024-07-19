@@ -13,30 +13,26 @@ class Program
         // Define the image size
         int width = 1000;
         int height = 1000;
-        SKColor backgroundColor = SKColors.WhiteSmoke;
+        SKColor backgroundColor = SKColors.White;
 
         Scene scene = new();
         Camera camera = new(Vector3.Zero);
         Viewport viewport = new(1f, 1f, 1f);
         Canvas sceneCanvas = new(width, height);
-        scene.AddEntity(new Sphere(new Vector3(0f, -1f, 3f), 1f, new SKColor(255, 0, 0)));
-        scene.AddEntity(new Sphere(new Vector3(2f, 0f, 4f), 1f, new SKColor(0, 0, 255)));
-        scene.AddEntity(new Sphere(new Vector3(-2f, 0f, 4f), 1f, new SKColor(0, 255, 0)));
-        scene.AddEntity(new Sphere(new Vector3(0f, -5001f, 0f), 5000f, new SKColor(255, 255, 0)));
+        scene.AddEntity(new Sphere(new Vector3(0f, -1f, 3f), 1f, new SKColor(255, 0, 0), 500f));
+        scene.AddEntity(new Sphere(new Vector3(2f, 0f, 4f), 1f, new SKColor(0, 0, 255), 500f));
+        scene.AddEntity(new Sphere(new Vector3(-2f, 0f, 4f), 1f, new SKColor(0, 255, 0), 10f));
+        scene.AddEntity(new Sphere(new Vector3(0f, -5001f, 0f), 5000f, new SKColor(255, 255, 0), 1000f));
         scene.AddLight(new AmbientLight(0.2f));
         scene.AddLight(new PointLight(0.6f, new Vector3(2f, 1f, 0f)));
         scene.AddLight(new DirectionalLight(0.2f, new Vector3(1f, 4f, 4f)));
 
-        // Create a new SKBitmap object
         using var bmp = new SKBitmap(width, height);
         {
-            // Create a new canvas to draw on the bitmap
             using (var canvas = new SKCanvas(bmp))
             {
-                // Clear the canvas with a white color
                 canvas.Clear(backgroundColor);
 
-                // Paint the pixel in the top left corner red
                 for (int x = 0; x < width; x++)
                 {
                     for (int y = 0; y < height; y++)
@@ -51,7 +47,6 @@ class Program
                 }
             }
 
-            // Save the image to a file
             string filePath = "image.png";
             using (var image = SKImage.FromBitmap(bmp))
             using (var data = image.Encode(SKEncodedImageFormat.Png, 100))

@@ -7,7 +7,7 @@ namespace RayTracingRenderer.Entities
     {
         private readonly float radius;
 
-        public Sphere(Vector3 position, float radius, SKColor color) : base(position, color)
+        public Sphere(Vector3 position, float radius, SKColor color, float specularExponent = -1f) : base(position, color, specularExponent)
         {
             this.radius = radius;
         }

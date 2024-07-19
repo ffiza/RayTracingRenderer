@@ -67,16 +67,16 @@ namespace RayTracingRenderer.Scene
             surfaceNormal /= surfaceNormal.Length();
 
             SKColor entityColor = closestEntity.GetColor();
-            float intensity = ComputeLightning(pointCoords, surfaceNormal);
+            float intensity = ComputeLightning(pointCoords, surfaceNormal, -ray.GetDirection(), closestEntity.GetSpecularExponent());
             SKColor color = new((byte)(entityColor.Red * intensity), (byte)(entityColor.Green * intensity), (byte)(entityColor.Blue * intensity));
 
             return color;
         }
 
-        public float ComputeLightning(Vector3 pointCoords, Vector3 surfaceNormal)
+        public float ComputeLightning(Vector3 pointCoords, Vector3 surfaceNormal, Vector3 viewDirection, float specularExponent)
         {
             float i = 0f;
-            foreach (Light light in lights)
+            foreach (Light light in this.GetLights())
             {
                 if (light is AmbientLight)
                 {
@@ -93,12 +93,30 @@ namespace RayTracingRenderer.Scene
                     {
                         lightDirection = (light as DirectionalLight).GetDirection();
                     }
+
+                    // Diffuse reflection
                     float normDotLight = Vector3.Dot(surfaceNormal, lightDirection);
                     if (normDotLight > 0)
                     {
                         i += light.GetIntensity() * normDotLight / surfaceNormal.Length() / lightDirection.Length();
                     }
+
+                    // Compute specular reflection
+                    if (specularExponent != -1)
+                    {
+                        Vector3 reflectedDir = 2 * surfaceNormal * Vector3.Dot(surfaceNormal, lightDirection) - lightDirection;
+                        float reflectedDotView = Vector3.Dot(reflectedDir, viewDirection);
+                        if (reflectedDotView > 0)
+                        {
+                            i += light.GetIntensity() * MathF.Pow(reflectedDotView / reflectedDir.Length() / viewDirection.Length(), specularExponent);
+                            //i += 0.05f;
+                        }
+                    }
                 }
+            }
+            if (i > 1f)
+            {
+                i = 1f;
             }
             return i;
         }
