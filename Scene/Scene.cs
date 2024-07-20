@@ -34,16 +34,17 @@ namespace RayTracingRenderer.Scene
             return this.lights;
         }
 
-        public SKColor TraceRay(Ray ray, float tMin, float tMax, SKColor defaultColor)
+        public List<object> ClosestIntersection(Ray ray, float tMin, float tMax)
         {
+            List<object> result = new();
             float closestRayParam = float.PositiveInfinity;
             Entity? closestEntity = null;
 
             foreach (Entity entity in entities)
             {
-                if (entity is Sphere)
+                if ((Sphere)entity is not null)
                 {
-                    Vector2 tIntersect = ray.SphereIntersect(entity as Sphere);
+                    Vector2 tIntersect = ray.SphereIntersect((Sphere)entity);
                     if ((tIntersect.X > tMin) & (tIntersect.X < tMax) & (tIntersect.X < closestRayParam))
                     {
                         closestRayParam = tIntersect.X;
@@ -56,7 +57,17 @@ namespace RayTracingRenderer.Scene
                     }
                 }
             }
-            
+            result.Add(closestEntity);
+            result.Add(closestRayParam);
+            return result;
+        }
+
+        public SKColor TraceRay(Ray ray, float tMin, float tMax, SKColor defaultColor)
+        {
+            List<object> closestIntersection = ClosestIntersection(ray, tMin, tMax);
+            Entity closestEntity = (Entity)closestIntersection[0];
+            float closestRayParam = (float)closestIntersection[1];
+
             if (closestEntity == null)
             {
                 return defaultColor;
