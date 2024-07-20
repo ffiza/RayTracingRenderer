@@ -22,7 +22,6 @@ class Program
         scene.AddEntity(new Sphere(new Vector3(0f, -1f, 3f), 1f, new SKColor(255, 0, 0), 500f));
         scene.AddEntity(new Sphere(new Vector3(2f, 0f, 4f), 1f, new SKColor(0, 0, 255), 500f));
         scene.AddEntity(new Sphere(new Vector3(-2f, 0f, 4f), 1f, new SKColor(0, 255, 0), 10f));
-        scene.AddEntity(new Sphere(new Vector3(-2f, 10f, 30f), 3f, new SKColor(150, 10, 150), 500f));
         scene.AddEntity(new Sphere(new Vector3(0f, -5001f, 0f), 5000f, new SKColor(255, 255, 0), 1000f));
         scene.AddLight(new AmbientLight(0.2f));
         scene.AddLight(new PointLight(0.6f, new Vector3(2f, 1f, 0f)));

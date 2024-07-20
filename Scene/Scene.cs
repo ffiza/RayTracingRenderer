@@ -78,7 +78,7 @@ namespace RayTracingRenderer.Scene
             surfaceNormal /= surfaceNormal.Length();
 
             SKColor entityColor = closestEntity.GetColor();
-            float intensity = ComputeLightning(pointCoords, surfaceNormal, - ray.GetDirection(), closestEntity.GetSpecularExponent());
+            float intensity = ComputeLightning(pointCoords, surfaceNormal, - ray.GetDirection(), closestEntity.GetSpecularExponent(), tMax);
             Byte rValue = (byte)Math.Clamp(entityColor.Red * intensity, 0, 255);
             Byte gValue = (byte)Math.Clamp(entityColor.Green * intensity, 0, 255);
             Byte bValue = (byte)Math.Clamp(entityColor.Blue * intensity, 0, 255);
@@ -87,7 +87,7 @@ namespace RayTracingRenderer.Scene
             return color;
         }
 
-        public float ComputeLightning(Vector3 pointCoords, Vector3 surfaceNormal, Vector3 viewDirection, float specularExponent)
+        public float ComputeLightning(Vector3 pointCoords, Vector3 surfaceNormal, Vector3 viewDirection, float specularExponent, float tMax)
         {
             float i = 0f;
             foreach (Light light in this.GetLights())
@@ -101,11 +101,20 @@ namespace RayTracingRenderer.Scene
                     Vector3 lightDirection;
                     if (light is PointLight)
                     {
-                        lightDirection = (light as PointLight).GetPosition() - pointCoords;
+                        lightDirection = ((PointLight)light).GetPosition() - pointCoords;
                     }
                     else
                     {
-                        lightDirection = (light as DirectionalLight).GetDirection();
+                        lightDirection = ((DirectionalLight)light).GetDirection();
+                    }
+
+                    // Shadow check
+                    Ray shadowRay = new(pointCoords, lightDirection);
+                    List<object> closestIntersection = ClosestIntersection(shadowRay, 0.001f, tMax);
+                    Entity closestEntity = (Entity)closestIntersection[0];
+                    if (closestEntity is not null)
+                    {
+                        continue;
                     }
 
                     // Diffuse reflection
