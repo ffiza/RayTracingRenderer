@@ -68,7 +68,10 @@ namespace RayTracingRenderer.Scene
 
             SKColor entityColor = closestEntity.GetColor();
             float intensity = ComputeLightning(pointCoords, surfaceNormal, - ray.GetDirection(), closestEntity.GetSpecularExponent());
-            SKColor color = new((byte)(entityColor.Red * intensity), (byte)(entityColor.Green * intensity), (byte)(entityColor.Blue * intensity));
+            Byte rValue = (byte)Math.Clamp(entityColor.Red * intensity, 0, 255);
+            Byte gValue = (byte)Math.Clamp(entityColor.Green * intensity, 0, 255);
+            Byte bValue = (byte)Math.Clamp(entityColor.Blue * intensity, 0, 255);
+            SKColor color = new(rValue, gValue, bValue);
 
             return color;
         }
@@ -112,10 +115,6 @@ namespace RayTracingRenderer.Scene
                         }
                     }
                 }
-            }
-            if (i > 1f)
-            {
-                i = 1f;
             }
             return i;
         }
