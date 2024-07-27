@@ -1,10 +1,5 @@
 ﻿using SkiaSharp;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Numerics;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace RayTracingRenderer.Entities
 {
@@ -13,27 +8,34 @@ namespace RayTracingRenderer.Entities
         private readonly Vector3 position;
         private readonly SKColor color;
         private readonly float specularExponent;
+        private readonly float reflectionIndex;
 
-        public Entity(Vector3 position, SKColor color, float specularExponent = -1f)
+        public Entity(Vector3 position, SKColor color, float specularExponent = -1f, float reflectionIndex = 1f)
         {
             this.position = position;
             this.color = color;
             this.specularExponent = specularExponent;
+            this.reflectionIndex = reflectionIndex;
         }
 
         public Vector3 GetPosition()
         {
-            return this.position;
+            return position;
         }
 
         public SKColor GetColor()
         {
-            return this.color;
+            return color;
         }
 
         public float GetSpecularExponent()
         {
-        return this.specularExponent;
+        return specularExponent;
+        }
+
+        public float GetReflectionIndex()
+        {
+            return reflectionIndex;
         }
     }
 }
