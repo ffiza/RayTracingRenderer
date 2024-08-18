@@ -2,7 +2,6 @@
 using RayTracingRenderer.Rays;
 using RayTracingRenderer.Lights;
 using SkiaSharp;
-using System;
 using System.Numerics;
 
 namespace RayTracingRenderer.Scene
@@ -62,7 +61,7 @@ namespace RayTracingRenderer.Scene
             return result;
         }
 
-        public SKColor TraceRay(Ray ray, float tMin, float tMax, SKColor defaultColor)
+        public Vector3 TraceRay(Ray ray, float tMin, float tMax, Vector3 defaultColor, int recursionDepth)
         {
             List<object> closestIntersection = ClosestIntersection(ray, tMin, tMax);
             Entity closestEntity = (Entity)closestIntersection[0];
@@ -79,12 +78,41 @@ namespace RayTracingRenderer.Scene
 
             SKColor entityColor = closestEntity.GetColor();
             float intensity = ComputeLightning(pointCoords, surfaceNormal, - ray.GetDirection(), closestEntity.GetSpecularExponent(), tMax);
-            Byte rValue = (byte)Math.Clamp(entityColor.Red * intensity, 0, 255);
-            Byte gValue = (byte)Math.Clamp(entityColor.Green * intensity, 0, 255);
-            Byte bValue = (byte)Math.Clamp(entityColor.Blue * intensity, 0, 255);
-            SKColor color = new(rValue, gValue, bValue);
+            Vector3 localColor = new(entityColor.Red * intensity,
+                                     entityColor.Green * intensity,
+                                     entityColor.Blue * intensity);
+            localColor = ClampColor(localColor);
 
+            // Check the recursion depth
+            float r = closestEntity.GetReflectionIndex();
+            if ((recursionDepth <= 0) || (r <= 0f))
+            {
+                return localColor;
+            }
+
+            // Compute reflection
+            Vector3 reflectedDir = -Vector3.Reflect(-ray.GetDirection(), surfaceNormal);
+            Ray reflectedRay = new(pointCoords, reflectedDir);
+            Vector3 reflectedColor = TraceRay(reflectedRay, 0.05f, float.PositiveInfinity, defaultColor, recursionDepth - 1);
+
+            // Blend result
+            Vector3 color = localColor * (1 - r) + reflectedColor * r;
             return color;
+        }
+
+        public static void PrintColorDebug(Vector3 color)
+        {
+            if (color.X > 255) { Console.WriteLine("R: " + color.X); }
+            if (color.Y > 255) { Console.WriteLine("G: " + color.Y); }
+            if (color.Z > 255) { Console.WriteLine("B: " + color.Z); }
+        }
+
+        public static Vector3 ClampColor(Vector3 color)
+        {
+            Byte rValue = (byte)Math.Clamp((int)color.X, 0, 255);
+            Byte gValue = (byte)Math.Clamp((int)color.Y, 0, 255);
+            Byte bValue = (byte)Math.Clamp((int)color.Z, 0, 255);
+            return new Vector3(rValue, gValue, bValue);
         }
 
         public float ComputeLightning(Vector3 pointCoords, Vector3 surfaceNormal, Vector3 viewDirection, float specularExponent, float tMax)
@@ -125,7 +153,7 @@ namespace RayTracingRenderer.Scene
                     }
 
                     // Compute specular reflection
-                    if (specularExponent != -1)
+                    if (specularExponent > -1)
                     {
                         Vector3 reflectedDir = - Vector3.Reflect(lightDirection, surfaceNormal);
                         float reflectedDotView = Vector3.Dot(reflectedDir, viewDirection);
