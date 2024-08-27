@@ -17,9 +17,9 @@ This project is inspired by the book *Computer Graphics from Scratch* by Gabriel
 </p>
 <p align="center">An example of a 3D scene rendered at the current state of the project.</p>
 
-Future Work:
+Future work:
 
-* Implement ray tracing with triangles using the Möller-Trumbore algorithm.
-* Implement cubes and other primitives composed of triangles.
-* Add parallelization for ray calculations.
-* Implement objects with transparency.
+- [ ] Implement ray tracing with triangles using the Möller-Trumbore algorithm.
+- [ ] Implement cubes and other primitives composed of triangles.
+- [ ] Add parallelization for ray calculations.
+- [ ] Implement objects with transparency.
