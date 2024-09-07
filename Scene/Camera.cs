@@ -4,16 +4,11 @@ namespace RayTracingRenderer.Scene
 {
     public class Camera
     {
-        private Vector3 position;
+        public Vector3 Position { get; private set; }
 
         public Camera(Vector3 position)
         {
-            this.position = position;
-        }
-
-        public Vector3 GetPosition()
-        {
-            return this.position;
+            Position = position;
         }
     }
 }

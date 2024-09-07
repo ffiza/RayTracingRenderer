@@ -5,32 +5,22 @@ namespace RayTracingRenderer.Rays
 {
     public class Ray
     {
-        Vector3 position;
-        Vector3 direction;
+        public Vector3 Position { get; private set; }
+        public Vector3 Direction { get; private set; }
 
         public Ray(Vector3 position, Vector3 direction)
         {
-            this.position = position;
-            this.direction = direction;
-        }
-
-        public Vector3 GetPosition()
-        {
-            return this.position;
-        }
-
-        public Vector3 GetDirection()
-        { 
-            return this.direction;
+            Position = position;
+            Direction = direction;
         }
 
         public Vector2 SphereIntersect(Sphere sphere)
         {
-            float sphereRadius = sphere.GetRadius();
-            Vector3 spherePosToRayPos = this.GetPosition() - sphere.GetPosition();
+            float sphereRadius = sphere.Radius;
+            Vector3 spherePosToRayPos = Position - sphere.Position;
 
-            float a = Vector3.Dot(this.GetDirection(), this.GetDirection());
-            float b = 2f * Vector3.Dot(spherePosToRayPos, this.GetDirection());
+            float a = Vector3.Dot(Direction, Direction);
+            float b = 2f * Vector3.Dot(spherePosToRayPos, Direction);
             float c = Vector3.Dot(spherePosToRayPos, spherePosToRayPos) - sphereRadius * sphereRadius;
 
             float discriminant = b * b - 4 * a * c;

@@ -2,23 +2,13 @@
 {
     public class Canvas
     {
-        private readonly int width;
-        private readonly int height;
+        public int Width { get; private set; }
+        public int Height { get; private set; }
 
         public Canvas(int width, int height)
         {
-            this.width = width;
-            this.height = height;
-        }
-
-        public int GetWidth()
-        {
-            return this.width;
-        }
-
-        public int GetHeight()
-        {
-            return this.height;
+            Width = width;
+            Height = height;
         }
     }
 }

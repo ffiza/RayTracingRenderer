@@ -72,26 +72,26 @@ namespace RayTracingRenderer.Scene
                 return defaultColor;
             }
 
-            Vector3 pointCoords = ray.GetPosition() + closestRayParam * ray.GetDirection();
-            Vector3 surfaceNormal = pointCoords - closestEntity.GetPosition();
+            Vector3 pointCoords = ray.Position + closestRayParam * ray.Direction;
+            Vector3 surfaceNormal = pointCoords - closestEntity.Position;
             surfaceNormal /= surfaceNormal.Length();
 
-            SKColor entityColor = closestEntity.GetColor();
-            float intensity = ComputeLightning(pointCoords, surfaceNormal, - ray.GetDirection(), closestEntity.GetSpecularExponent(), tMax);
+            SKColor entityColor = closestEntity.Color;
+            float intensity = ComputeLightning(pointCoords, surfaceNormal, - ray.Direction, closestEntity.SpecularExponent, tMax);
             Vector3 localColor = new(entityColor.Red * intensity,
                                      entityColor.Green * intensity,
                                      entityColor.Blue * intensity);
             localColor = ClampColor(localColor);
 
             // Check the recursion depth
-            float r = closestEntity.GetReflectionIndex();
+            float r = closestEntity.ReflectionIndex;
             if ((recursionDepth <= 0) || (r <= 0f))
             {
                 return localColor;
             }
 
             // Compute reflection
-            Vector3 reflectedDir = -Vector3.Reflect(-ray.GetDirection(), surfaceNormal);
+            Vector3 reflectedDir = -Vector3.Reflect(-ray.Direction, surfaceNormal);
             Ray reflectedRay = new(pointCoords, reflectedDir);
             Vector3 reflectedColor = TraceRay(reflectedRay, 0.05f, float.PositiveInfinity, defaultColor, recursionDepth - 1);
 
@@ -122,18 +122,18 @@ namespace RayTracingRenderer.Scene
             {
                 if (light is AmbientLight)
                 {
-                    i += light.GetIntensity();
+                    i += light.Intensity;
                 }
                 else
                 {
                     Vector3 lightDirection;
                     if (light is PointLight)
                     {
-                        lightDirection = ((PointLight)light).GetPosition() - pointCoords;
+                        lightDirection = ((PointLight)light).Position - pointCoords;
                     }
                     else
                     {
-                        lightDirection = ((DirectionalLight)light).GetDirection();
+                        lightDirection = ((DirectionalLight)light).Direction;
                     }
 
                     // Shadow check
@@ -149,7 +149,7 @@ namespace RayTracingRenderer.Scene
                     float normDotLight = Vector3.Dot(surfaceNormal, lightDirection);
                     if (normDotLight > 0)
                     {
-                        i += light.GetIntensity() * normDotLight / surfaceNormal.Length() / lightDirection.Length();
+                        i += light.Intensity * normDotLight / surfaceNormal.Length() / lightDirection.Length();
                     }
 
                     // Compute specular reflection
@@ -159,7 +159,7 @@ namespace RayTracingRenderer.Scene
                         float reflectedDotView = Vector3.Dot(reflectedDir, viewDirection);
                         if (reflectedDotView > 0)
                         {
-                            i += light.GetIntensity() * MathF.Pow(reflectedDotView / reflectedDir.Length() / viewDirection.Length(), specularExponent);
+                            i += light.Intensity * MathF.Pow(reflectedDotView / reflectedDir.Length() / viewDirection.Length(), specularExponent);
                         }
                     }
                 }

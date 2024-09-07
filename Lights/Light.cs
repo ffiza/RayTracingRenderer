@@ -2,16 +2,11 @@
 {
     public class Light
     {
-        private readonly float intensity;
+        public float Intensity { get; protected set; }
         
         public Light(float intensity)
         {
-            this.intensity = intensity;
-        }
-
-        public float GetIntensity()
-        {
-            return intensity;
+            Intensity = intensity;
         }
     }
 }

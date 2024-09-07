@@ -4,16 +4,11 @@ namespace RayTracingRenderer.Lights
 {
     public class PointLight : Light
     {
-        private Vector3 position;
+        public Vector3 Position { get; private set; }
 
         public PointLight(float intensity, Vector3 position) : base(intensity)
         {
-            this.position = position;
-        }
-
-        public Vector3 GetPosition()
-        {
-            return this.position;
+            Position = position;
         }
     }
 }

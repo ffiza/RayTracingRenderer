@@ -15,8 +15,8 @@ namespace RayTracingRenderer.Common
         /// <returns>The coordinates in viewport space.</returns>
         public static Vector2 CanvasToViewport(int xCanvas, int yCanvas, Canvas canvas, Viewport viewport)
         {
-            float xViewport = xCanvas * viewport.GetWidth() / canvas.GetWidth();
-            float yViewport = yCanvas * viewport.GetHeight() / canvas.GetHeight();
+            float xViewport = xCanvas * viewport.Width / canvas.Width;
+            float yViewport = yCanvas * viewport.Height / canvas.Height;
             return new Vector2(xViewport, yViewport);
         }
 
@@ -29,8 +29,8 @@ namespace RayTracingRenderer.Common
         /// <returns>The coordinates in screen space.</returns>
         public static Vector2 CanvasToScreen(int xCanvas, int yCanvas, Canvas canvas)
         {
-            int xScreen = xCanvas + canvas.GetWidth() / 2;
-            int yScreen = - yCanvas + canvas.GetHeight() / 2;
+            int xScreen = xCanvas + canvas.Width / 2;
+            int yScreen = - yCanvas + canvas.Height / 2;
             return new Vector2(xScreen, yScreen);
         }
 
@@ -44,8 +44,8 @@ namespace RayTracingRenderer.Common
         /// <returns>The coordinates in canvas space.</returns>
         public static Vector2 ScreenToCanvas(int xScreen, int yScreen, Canvas canvas)
         {
-            int xCanvas = xScreen - canvas.GetWidth() / 2;
-            int yCanvas = -yScreen + canvas.GetHeight() / 2;
+            int xCanvas = xScreen - canvas.Width / 2;
+            int yCanvas = -yScreen + canvas.Height / 2;
             return new Vector2(xCanvas, yCanvas);
         }
     }

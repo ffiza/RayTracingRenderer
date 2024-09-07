@@ -2,23 +2,13 @@
 {
     public class Screen
     {
-        private readonly float width;
-        private readonly float height;
+        public float Width { get; private set; }
+        public float Height { get; private set; }
 
         public Screen(float width, float height)
         {
-            this.width = width;
-            this.height = height;
-        }
-
-        public float GetWidth()
-        {
-            return this.width;
-        }
-
-        public float GetHeight()
-        {
-            return this.height;
+            Width = width;
+            Height = height;
         }
     }
 }
